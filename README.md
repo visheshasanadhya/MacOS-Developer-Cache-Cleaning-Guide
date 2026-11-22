@@ -1,224 +1,192 @@
-# MacOS-Developer-Cache-Cleaning-Guide
-
 <div align="center">
 
-![macOS](https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=white)
-![Xcode](https://img.shields.io/badge/Xcode-007ACC?style=for-the-badge&logo=Xcode&logoColor=white)
-![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
-![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+# 🧹 macOS Developer Cache Cleaning Guide
 
-**Complete Terminal Cheat Sheet for Developer Cache Management**
+**Emergency & maintenance terminal cheat sheet to rescue disk space and fix build errors.**
+
+[![macOS](https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=white)](#)
+[![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](#)
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](#)
+[![Xcode](https://img.shields.io/badge/Xcode-007ACC?style=for-the-badge&logo=Xcode&logoColor=white)](#)
+[![VS Code](https://img.shields.io/badge/VS_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)](#)
 
 </div>
 
 ---
 
-## ⚠️ BEFORE YOU START
-
-> **🚨 CLOSE THESE APPS FIRST:**
-> 
-> ✅ Xcode  
-> ✅ Android Studio  
-> ✅ VS Code  
-> ✅ Chrome  
-> ✅ Simulators/Emulators
+> [!TIP]
+> ### ⚡ 10-Second Emergency Cleanup
+> Instantly reclaims **15–25 GB** when your build fails due to *"No space left on device"*:
+> ```bash
+> pkill -f '.*GradleDaemon.*'
+> rm -rf ~/.gradle/caches/* ~/.gradle/daemon/* ~/Library/Developer/Xcode/DerivedData/* ~/Library/Caches/Google/Chrome/*
+> ```
 
 ---
 
-## 🚀 AUTO CLEAN SCRIPT
+<div align="center">
 
-### **Step 1: Create the Script**
+### 🧭 Quick Navigation
+
+[🤖 Gradle](#gradle) &nbsp;|&nbsp;
+[📲 Emulator](#emulator) &nbsp;|&nbsp;
+[🎯 Flutter](#flutter) &nbsp;|&nbsp;
+[🔧 Xcode](#xcode) &nbsp;|&nbsp;
+[📱 Simulator](#simulator) &nbsp;|&nbsp;
+[🍫 CocoaPods](#cocoapods)
+
+[🌐 Chrome](#chrome) &nbsp;|&nbsp;
+[💬 WhatsApp](#whatsapp) &nbsp;|&nbsp;
+[🔩 Android SDK](#android-sdk) &nbsp;|&nbsp;
+[💻 VS Code](#vscode) &nbsp;|&nbsp;
+[🤖 AI Tools](#ai-tools)
+
+[💾 macOS System](#system-cache) &nbsp;|&nbsp;
+[🌐 DNS](#dns) &nbsp;|&nbsp;
+[🍺 Homebrew](#homebrew) &nbsp;|&nbsp;
+[🗑️ Trash](#trash)
+
+</div>
+
+---
+
+## 📚 Commands by Category
+
+<a id="gradle"></a>
+### 🤖 Android Studio & Gradle
+*Fixes build failures, daemon locks, and old Gradle wrapper downloads. Reclaims: **5–20 GB**.*
 
 ```bash
-nano clean_all.sh
-```
-
-### **Step 2: Copy & Paste This Complete Script**
-
-```bash
-#!/bin/bash
-
-# 💾 macOS System Cache - Fixes slow system performance and app lag
-rm -rf ~/Library/Caches/*
-rm -rf ~/Library/Logs/*
-sudo rm -rf /Library/Caches/*
-
-# 🔧 Xcode DerivedData - Fixes Xcode build and indexing issues
-rm -rf ~/Library/Developer/Xcode/DerivedData/*
-
-# 🔧 Xcode Module Cache - Fixes module compilation errors
-rm -rf ~/Library/Developer/Xcode/ModuleCache.noindex/*
-
-# 🔧 Xcode Archives - Removes old app archives
-rm -rf ~/Library/Developer/Xcode/Archives/*
-
-# 🔌 Xcode Device Support - Clears old iOS device pairing data
-rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/*
-
-# 📱 iOS Simulator Cache - Fixes simulator performance issues
-rm -rf ~/Library/Developer/CoreSimulator/Caches/*
-
-# 📱 iOS Simulator Logs - Clears simulator crash logs
-rm -rf ~/Library/Logs/CoreSimulator/*
-
-# 🎯 Flutter pub-cache - Fixes Flutter package dependency issues
-rm -rf ~/.pub-cache/*
-
-# 🤖 Gradle Cache - Fixes Android build and dependency errors
+pkill -f '.*GradleDaemon.*'
 rm -rf ~/.gradle/caches/*
-
-# 🤖 Android SDK folder - Clears Android emulator and SDK cache
-rm -rf ~/.android/*
-
-# 💻 VS Code Cache - Fixes VS Code performance and extension issues
-rm -rf ~/Library/Application\ Support/Code/Cache/*
-rm -rf ~/Library/Application\ Support/Code/CachedData/*
-rm -rf ~/Library/Application\ Support/Code/Service\ Worker/CacheStorage/*
-
-# 🌐 Chrome Cache - Fixes browser slowness and DevTools issues
-rm -rf ~/Library/Caches/Google/Chrome/*
-
-# 🍫 CocoaPods Cache - Fixes iOS dependency management issues
-rm -rf ~/.cocoapods/*
-rm -rf ~/Library/Caches/CocoaPods/*
-
-echo "------------------------------------------------------------"
-echo "🎉 All Done! Restart Mac for best performance."
-```
-
-### **Step 3: Make Executable & Run**
-
-```bash
-chmod +x clean_all.sh
-./clean_all.sh
+rm -rf ~/.gradle/daemon/*
+rm -rf ~/.gradle/wrapper/dists/*
 ```
 
 ---
 
-## 📚 MANUAL COMMANDS BY CATEGORY
-
-### 💾 **macOS System Cache**
-Fixes: Slow system performance and app lag
-
-```bash
-rm -rf ~/Library/Caches/*
-rm -rf ~/Library/Logs/*
-```
-
----
-
-### 🌐 **Google Chrome Cache**
-Fixes: Browser slowness and DevTools performance issues
-
-```bash
-rm -rf ~/Library/Caches/Google/Chrome
-rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Cache
-```
-
----
-
-### 🎯 **Flutter & Dart**
-Fixes: Flutter build errors, pub dependencies, and package issues
-
-```bash
-flutter clean
-flutter pub cache repair
-rm -rf .dart_tool build
-```
-
-**Hard Reset** (Only for severe dependency issues)
-
-```bash
-rm -rf ~/.pub-cache
-flutter pub get
-```
-
----
-
-### 🔧 **Xcode Cache**
-Fixes: Xcode build failures, indexing problems, and compilation errors
-
-```bash
-rm -rf ~/Library/Developer/Xcode/DerivedData/*
-rm -rf ~/Library/Developer/Xcode/Archives/*
-rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/*
-```
-
-**Clear iOS Pairing Data** (Fixes device connection issues)
-
-```bash
-rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/*
-rm -rf ~/Library/Developer/Xcode/DerivedData/*
-```
-
----
-
-### 📱 **iOS Simulator**
-Fixes: Simulator boot failures, runtime errors, and performance issues
-
-```bash
-xcrun simctl shutdown all
-xcrun simctl erase all
-xcrun simctl delete unavailable
-```
-
----
-
-### 🍫 **CocoaPods**
-Fixes: iOS dependency management and pod installation issues
-
-```bash
-pod cache clean --all
-rm -rf ~/Library/Caches/CocoaPods
-```
-
-**Project Reset** (Run from project root)
-
-```bash
-cd ios
-pod deintegrate
-rm -rf Pods Podfile.lock
-pod install
-cd ..
-```
-
----
-
-### 🤖 **Android Studio & Gradle**
-Fixes: Gradle build errors and dependency resolution issues
-
-```bash
-rm -rf ~/.gradle/caches
-rm -rf ~/.gradle/daemon
-```
-
----
-
-### 📲 **Android Emulator**
-Fixes: Android emulator boot failures and snapshot corruption
+<a id="emulator"></a>
+### 📲 Android Emulator
+*Fixes emulator crashes, snapshot corruption, and bloated storage. Reclaims: **5–12 GB**.*
 
 ```bash
 adb kill-server
 adb start-server
 rm -rf ~/.android/avd/*.avd/cache
 rm -rf ~/.android/avd/*.avd/snapshots
+rm -rf ~/.android/cache/*
+```
+
+**Reset Emulator User Data** *(Reclaims 5–10+ GB without deleting the device)*
+```bash
+rm -rf ~/.android/avd/*.avd/userdata-qemu.img.qcow2
 ```
 
 ---
 
-### 🔩 **Android SDK Temp**
-Fixes: Clears Android SDK temporary and cache files
+<a id="flutter"></a>
+### 🎯 Flutter & Dart
+*Fixes pub package corruption and stale build output bloat. Reclaims: **5–15 GB**.*
 
 ```bash
-rm -rf ~/Library/Android/sdk/.temp
+flutter pub cache clean -f
+rm -rf ~/.pub-cache
+```
+
+**Repair Global Package Cache**
+```bash
+flutter pub cache repair
+```
+
+**Bulk Clean All Flutter Projects** *(Run inside your projects directory, e.g. `~/StudioProjects`)*
+```bash
+find . -maxdepth 3 -type d -name "build" -exec rm -rf {} +
+find . -maxdepth 3 -type d -name ".dart_tool" -exec rm -rf {} +
+```
+
+---
+
+<a id="xcode"></a>
+### 🔧 Xcode Cache
+*Fixes Xcode build failures, indexing loops, and compilation errors. Reclaims: **5–20 GB**.*
+
+```bash
+rm -rf ~/Library/Developer/Xcode/DerivedData/*
+rm -rf ~/Library/Developer/Xcode/Archives/*
+rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/*
+rm -rf ~/Library/Developer/Xcode/ModuleCache.noindex/*
+rm -rf ~/Library/Caches/com.apple.dt.Xcode
+```
+
+---
+
+<a id="simulator"></a>
+### 📱 iOS Simulator
+*Fixes simulator boot failures, runtime errors, and crash log buildup. Reclaims: **2–10 GB**.*
+
+```bash
+xcrun simctl shutdown all
+xcrun simctl erase all
+xcrun simctl delete unavailable
+rm -rf ~/Library/Developer/CoreSimulator/Caches/*
+rm -rf ~/Library/Logs/CoreSimulator/*
+```
+
+---
+
+<a id="cocoapods"></a>
+### 🍫 CocoaPods
+*Fixes iOS pod dependency management, broken specs, and stale downloads. Reclaims: **1–3 GB**.*
+
+```bash
+pod cache clean --all
+rm -rf ~/Library/Caches/CocoaPods
+rm -rf ~/.cocoapods/cache
+```
+
+---
+
+<a id="chrome"></a>
+### 🌐 Google Chrome Cache
+*Fixes browser slowness, DevTools lag, and gigabytes of cached media. Reclaims: **2–6 GB**.*
+
+```bash
+rm -rf ~/Library/Caches/Google/Chrome
+rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Cache
+rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Code\ Cache
+```
+
+---
+
+<a id="whatsapp"></a>
+### 💬 WhatsApp Cache & Shared Files
+*Clears WhatsApp auto-update installer bloat and temporary caches. Reclaims: **1–5 GB**.*
+
+```bash
+rm -rf ~/Library/Caches/net.whatsapp.WhatsApp/*
+```
+
+> [!NOTE]
+> **How to delete shared APK & AAB files in WhatsApp:**  
+> WhatsApp stores sent/received APKs/AABs in its internal database. To clear them:  
+> Open WhatsApp → **Settings (`Cmd + ,`) → Storage and Data → Manage Storage** → Select **"Larger than 5 MB"** → Select All and Delete.
+
+---
+
+<a id="android-sdk"></a>
+### 🔩 Android SDK Temp
+*Clears Android SDK temporary packages and installation residue.*
+
+```bash
+rm -rf ~/Library/Android/sdk/.temp/*
 rm -rf ~/Library/Android/sdk/.knownPackages
 ```
 
 ---
 
-### 💻 **VS Code Cache**
-Fixes: VS Code extension corruption and performance lag
+<a id="vscode"></a>
+### 💻 VS Code Cache
+*Fixes VS Code extension corruption and performance lag.*
 
 ```bash
 rm -rf ~/Library/Application\ Support/Code/Cache
@@ -227,16 +195,50 @@ rm -rf ~/Library/Application\ Support/Code/User/workspaceStorage
 rm -rf ~/Library/Logs/Code
 ```
 
-**Extensions Reset** (Optional, only if corrupted)
-
+**Reset Corrupted Extensions** *(Optional)*
 ```bash
 rm -rf ~/.vscode/extensions
 ```
 
 ---
 
-### 🍺 **Homebrew Cache**
-Fixes: Clears Homebrew package cache and frees disk space
+<a id="ai-tools"></a>
+### 🤖 AI Developer Tools Cache
+*Clears temporary model cache, assistant logs, and background updater files.*
+
+```bash
+rm -rf ~/Library/Caches/com.openai.codex/*
+rm -rf ~/Library/Caches/com.google.antigravity-ide.ShipIt/*
+```
+
+---
+
+<a id="system-cache"></a>
+### 💾 macOS System Cache & QuickLook
+*Fixes slow system performance, diagnostic lag, and corrupt preview thumbnails.*
+
+```bash
+rm -rf ~/Library/Caches/*
+rm -rf ~/Library/Logs/*
+qlmanage -r cache
+qlmanage -r
+```
+
+---
+
+<a id="dns"></a>
+### 🌐 DNS & Network Cache
+*Fixes localhost connection glitches, API endpoint routing errors, and stale DNS.*
+
+```bash
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+```
+
+---
+
+<a id="homebrew"></a>
+### 🍺 Homebrew Cache
+*Clears Homebrew bottle downloads and frees package cache space.*
 
 ```bash
 brew cleanup -s
@@ -245,17 +247,9 @@ rm -rf ~/Library/Caches/Homebrew
 
 ---
 
-### 👁️ **Watchman**
-Fixes: React Native file watching issues
-
-```bash
-watchman watch-del-all
-```
-
----
-
-### 🗑️ **Trash**
-Fixes: Empties trash to free disk space
+<a id="trash"></a>
+### 🗑️ Trash
+*Empties trash to free disk space immediately.*
 
 ```bash
 rm -rf ~/.Trash/*
@@ -263,214 +257,13 @@ rm -rf ~/.Trash/*
 
 ---
 
-## 🔄 QUICK USEFUL COMMANDS
-
-```bash
-# 🎯 Flutter Commands
-flutter clean
-flutter pub get
-
-# 📱 iOS Simulator Commands
-xcrun simctl shutdown all
-xcrun simctl erase all
-
-# 🤖 Android Emulator Commands
-adb kill-server
-adb start-server
-```
-
----
-
-## 🛠️ SAFE & AGGRESSIVE CLEANING MODES
-
-### **Create the Script**
-
-```bash
-nano clean.sh
-```
-
-### **Copy & Paste This Script**
-
-```bash
-#!/bin/bash
-# 🧹 macOS Developer Cleaning Script
-# Modes:
-# safe       → Recommended, no system risk
-# aggressive → Deep clean, requires sudo
-
-MODE=$1
-
-if [[ "$MODE" == "safe" ]]; then
-  # 💾 macOS User Cache - Fixes slow system and app lag
-  rm -rf ~/Library/Caches/*
-  rm -rf ~/Library/Logs/*
-
-  # 🎯 Flutter - Fixes pub, build & dependency errors
-  flutter clean
-  rm -rf ~/.pub-cache/.lock
-
-  # 🔧 Xcode - Fixes build, indexing, pairing issues
-  rm -rf ~/Library/Developer/Xcode/DerivedData/*
-  rm -rf ~/Library/Developer/Xcode/ModuleCache.noindex/*
-  rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/*
-
-  # 📱 iOS Simulator - Fixes boot & runtime errors
-  xcrun simctl shutdown all
-  rm -rf ~/Library/Developer/CoreSimulator/Caches/*
-  rm -rf ~/Library/Logs/CoreSimulator/*
-
-  # 🤖 Android Studio & Emulator - Fixes Gradle & emulator issues
-  rm -rf ~/.gradle/caches/*
-  rm -rf ~/.android/avd/*.avd/cache
-
-  # 💻 VS Code - Fixes extension & cache corruption
-  rm -rf ~/Library/Application\ Support/Code/Cache/*
-  rm -rf ~/Library/Application\ Support/Code/CachedData/*
-
-  # 🌐 Chrome - Fixes browser lag & DevTools issues
-  rm -rf ~/Library/Caches/Google/Chrome/*
-
-  echo "✅ Safe mode cleaning completed!"
-
-elif [[ "$MODE" == "aggressive" ]]; then
-  # 💾 SYSTEM CACHE - Deep system cleanup
-  rm -rf ~/Library/Caches/*
-  rm -rf ~/Library/Logs/*
-  sudo rm -rf /Library/Caches/*
-
-  # 🔧 Xcode - Deep clean
-  rm -rf ~/Library/Developer/Xcode/*
-  rm -rf ~/Library/Developer/CoreSimulator/*
-
-  # 🎯 Flutter - Deep reset
-  rm -rf ~/.pub-cache
-  rm -rf .dart_tool build
-
-  # 🤖 Android - Deep reset
-  rm -rf ~/.gradle
-  rm -rf ~/.android
-
-  # 💻 VS Code - Deep reset
-  rm -rf ~/Library/Application\ Support/Code
-  rm -rf ~/.vscode
-
-  # 🌐 Chrome - Full cache reset
-  rm -rf ~/Library/Caches/Google/Chrome
-  rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Cache
-
-  echo "✅ Aggressive mode cleaning completed!"
-  echo "⚠️  Please restart your Mac for best results."
-
-else
-  echo "❌ Usage: ./clean.sh safe | aggressive"
-  echo ""
-  echo "Examples:"
-  echo "  ./clean.sh safe        → Safe cleaning (recommended)"
-  echo "  sudo ./clean.sh aggressive → Deep cleaning (requires sudo)"
-fi
-```
-
-### **Make Executable**
-
-```bash
-chmod +x clean.sh
-```
-
-### **Run SAFE Mode**
-
-```bash
-./clean.sh safe
-```
-
-### **Run AGGRESSIVE Mode**
-
-```bash
-sudo ./clean.sh aggressive
-```
-
----
-
-## ⚙️ TERMINAL TIPS
-
-### **ZSH Configuration**
-
-```bash
-# Reload terminal config
-source ~/.zshrc
-
-# Edit config file
-nano ~/.zshrc
-```
-
-### **Nano Editor Shortcuts**
-
-| Shortcut | Action |
-|----------|--------|
-| `CTRL + O` | 💾 Save file |
-| `CTRL + X` | 🚪 Exit nano |
-| `CTRL + W` | 🔍 Search in file |
-
----
-
-## 🚨 SAFETY WARNINGS
-
-### ❌ **NEVER RUN THESE COMMANDS:**
-
-```bash
-# ⛔ THESE WILL DESTROY YOUR MAC!
-rm -rf /System
-rm -rf /Library
-rm -rf ~/Documents
-rm -rf ~/Desktop
-```
-
-> **🔥 DANGER:**  
-> - 💀 Will damage macOS beyond repair  
-> - 📁 Will delete ALL your files  
-> - 🚫 Will make Mac unbootable  
-> - ⚠️ Requires complete reinstallation
-
----
-
-## 📊 DISK SPACE IMPACT
-
-| Category | Impact | Space Saved |
-|----------|--------|-------------|
-| 💾 macOS System Cache | 🔴 High | 1-5 GB |
-| 🔧 Xcode DerivedData | 🔴 High | 5-20 GB |
-| 📱 iOS Simulator | 🟡 Medium | 2-10 GB |
-| 🎯 Flutter Cache | 🟡 Medium | 500 MB - 2 GB |
-| 🤖 Android/Gradle | 🔴 High | 2-15 GB |
-| 💻 VS Code Cache | 🟢 Low | 100-500 MB |
-| 🌐 Chrome Cache | 🟡 Medium | 500 MB - 2 GB |
-| 🍫 CocoaPods | 🟢 Low | 100-500 MB |
-
----
-
-## 🎯 WHEN TO USE EACH MODE
-
-### **Use SAFE Mode:**
-- ✅ Regular maintenance
-- ✅ Minor performance issues
-- ✅ Build errors after updates
-- ✅ First time cleaning
-
-### **Use AGGRESSIVE Mode:**
-- ⚠️ Major system slowdown
-- ⚠️ Persistent build failures
-- ⚠️ Critically low disk space
-- ⚠️ Last resort option
-
----
-
 <div align="center">
 
 **Made with ❤️ for macOS Developers**
 
-![Platform](https://img.shields.io/badge/Platform-macOS-blue?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen?style=flat-square)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-**⭐ Star this repo if it helped you!**
+⭐ **Star this repository if it helped you free up disk space!**
 
 </div>
