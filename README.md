@@ -16,13 +16,12 @@
 ---
 
 ### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" width="20" height="20" /> Android Studio & Gradle
-*Clears build cache, daemons, and old wrapper zips. Reclaims: **5–20 GB**.*
+*Clears build caches and stale Gradle daemons. Reclaims: **5–15 GB**.*
 
 ```bash
 pkill -f '.*GradleDaemon.*'
 rm -rf ~/.gradle/caches/*
 rm -rf ~/.gradle/daemon/*
-rm -rf ~/.gradle/wrapper/dists/*
 ```
 
 ---
